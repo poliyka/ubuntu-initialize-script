@@ -22,6 +22,7 @@ INSTALL_RANGER="True"
 INSTALL_NVM="True"
 INSTALL_YARN="True"
 INSTALL_FZF="True"
+CONFIG_BASHRC="True"
 
 #--------------------------------------------------
 # Update Server
@@ -86,7 +87,17 @@ INSTALL_FZF="True"
 # fi
 
 
+#--------------------------------------------------
+# Config bashrc
+#--------------------------------------------------
+if [ $CONFIG_BASHRC = "True" ]; then
+  sed -i -e '$a\
+  export PS1="\[\033[01;32m\]\u@\h\[\e[91m\]\$(parse_git_branch) \[\e[1;33m\]\D{%Y/%m/%d} \t\[\033[00m\]:\n\[\e[34m\]\w\[\e[00m\]$ "
+  '
+fi
+
 echo "-----------------------------------------------------------"
 echo "Done! Ubuntu Initialize Dependenies:"
-echo "Nginx configuration file: /etc/nginx/sites-available/odoo"
+echo "Finished. Restart your shell or reload config file."
+echo "source ~/.bashrc"
 echo "-----------------------------------------------------------"
