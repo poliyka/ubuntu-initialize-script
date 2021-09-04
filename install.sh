@@ -87,6 +87,7 @@ fi
 # Config bashrc
 #--------------------------------------------------
 if [ $CONFIG_BASHRC_COLOR = "True" ]; then
+  echo -e "\n---- Config bashrc color ----"
   sed -i -e '$a\
 parse_git_branch() {\
   git branch 2> /dev/null | sed -e \"/^[^*]/d\" -e \"s/* \\(.*\\)/(\\1)/\"\
@@ -100,6 +101,7 @@ fi
 # Config Git Alias
 #--------------------------------------------------
 if [ $CONFIG_GIT_ALIAS = "True" ]; then
+  echo -e "\n---- Config git alias ----"
   GITCONFIG_PATH=$OE_HOME/.gitconfig
   if ! sed -n '/\[alias\]/p' $GITCONFIG_PATH | grep '[alias]'; then
     sudo su $OE_USER -c "printf '[alias]\n' >> $GITCONFIG_PATH"
