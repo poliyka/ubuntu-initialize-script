@@ -2,11 +2,6 @@
 ################################################################################
 # Script for installing Ubuntu 20.04 initialize dependencise package
 # Author: Poliyka
-#-------------------------------------------------------------------------------
-# This script install List
-#
-#-------------------------------------------------------------------------------
-# Make a new file:
 ################################################################################
 
 #--------------------------------------------------
@@ -18,30 +13,30 @@ OE_HOME="/home/$OE_USER"
 #--------------------------------------------------
 # Choose Dependencise
 #--------------------------------------------------
-INSTALL_RANGER="False"
-INSTALL_NVM="False"
-INSTALL_YARN="False"
-INSTALL_FZF="False"
-CONFIG_BASHRC="False"
+INSTALL_RANGER="True"
+INSTALL_NVM="True"
+INSTALL_YARN="True"
+INSTALL_FZF="True"
+CONFIG_BASHRC_COLOR="True"
 CONFIG_GIT_ALIAS="True"
 
 #--------------------------------------------------
 # Update Server
 #--------------------------------------------------
-# echo -e "\n---- Update Server ----"
-# sudo apt-get update
-# sudo apt-get upgrade -y
+echo -e "\n---- Update Server ----"
+sudo apt-get update
+sudo apt-get upgrade -y
 
 #--------------------------------------------------
 # Install Dependencies
 #--------------------------------------------------
-# echo -e "\n---- Installing apt-get Dependencise ----"
-# sudo apt-get install git python3 python3-pip build-essential wget make vim python3-dev -y
-# sudo apt-get install python3-venv python3-wheel libxslt-dev libzip-dev libldap2-dev libsasl2-dev -y
-# sudo apt-get install python3-setuptools node-less libpng12-0 libjpeg-dev gdebi python3-virtualenv -y
-# sudo apt-get install libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl llvm libncurses5-dev -y
-# sudo apt-get install libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl  libxml2-dev -y
-# sudo apt-get install libxslt1-dev libjpeg62-dev vim-gtk3 pipenv silversearcher-ag exuberant-ctags figlet tox net-tools -y
+echo -e "\n---- Installing apt-get Dependencise ----"
+sudo apt-get install git python3 python3-pip build-essential wget make vim python3-dev -y
+sudo apt-get install python3-venv python3-wheel libxslt-dev libzip-dev libldap2-dev libsasl2-dev -y
+sudo apt-get install python3-setuptools node-less libpng12-0 libjpeg-dev gdebi python3-virtualenv -y
+sudo apt-get install libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl llvm libncurses5-dev -y
+sudo apt-get install libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl  libxml2-dev -y
+sudo apt-get install libxslt1-dev libjpeg62-dev vim-gtk3 pipenv silversearcher-ag exuberant-ctags figlet tox net-tools -y
 
 #--------------------------------------------------
 # Install Ranger
@@ -91,7 +86,7 @@ fi
 #--------------------------------------------------
 # Config bashrc
 #--------------------------------------------------
-if [ $CONFIG_BASHRC = "True" ]; then
+if [ $CONFIG_BASHRC_COLOR = "True" ]; then
   sed -i -e '$a\
 parse_git_branch() {\
   git branch 2> /dev/null | sed -e \"/^[^*]/d\" -e \"s/* \\(.*\\)/(\\1)/\"\
