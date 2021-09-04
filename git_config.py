@@ -6,12 +6,10 @@ from base import (
 
 
 def update_git_config():
-    # file_name = u".config"
-    file_name = u"test.cfg"
+    # file_name = u".gitconfig"
+    file_name = u".gitconfig"
     directory_path = os.path.expanduser("~")
-    # file_path = f"{directory_path}/{file_name}"
-    file_path = f"{directory_path}/ubuntu-initialize-script/{file_name}"
-
+    file_path = f"{directory_path}/{file_name}"
     match_str = "[alias]"
 
     insert_str = r"""

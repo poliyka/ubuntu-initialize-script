@@ -105,7 +105,7 @@ fi
 # Config Git Alias
 #--------------------------------------------------
 if [ $CONFIG_GIT_ALIAS = "True" ]; then
-  GITCONFIG_PATH=$OD_HOME/.gitconfig
+  GITCONFIG_PATH=$OE_HOME/.gitconfig
   if ! sed -n '/\[alias\]/p' $GITCONFIG_PATH | grep '[alias]'; then
     sudo su $OE_USER -c "printf '[alias]\n' >> $GITCONFIG_PATH"
   fi
