@@ -23,6 +23,7 @@ INSTALL_NVM="True"
 INSTALL_YARN="True"
 INSTALL_FZF="True"
 CONFIG_BASHRC="True"
+CONFIG_GIT_ALIAS="True"
 
 #--------------------------------------------------
 # Update Server
@@ -90,13 +91,40 @@ CONFIG_BASHRC="True"
 #--------------------------------------------------
 # Config bashrc
 #--------------------------------------------------
-if [ $CONFIG_BASHRC = "True" ]; then
-  sed -i -e '$a\
-parse_git_branch() {\
-  git branch 2> /dev/null | sed -e \"/^[^*]/d\" -e \"s/* \\(.*\\)/(\\1)/\"\
-}\
-export PS1=\"\\[\\033[01;32m\\]\\u@\\h \\[\\e[91m\\]\\$(parse_git_branch) \\[\\e[1;33m\\]\\D{%Y/%m/%d} \\t\\[\\033[00m\\]:\\n\\[\\e[34m\\]\\w\\[\\e[00m\\]\$ \"
-' $OE_HOME/.bashrc
+# if [ $CONFIG_BASHRC = "True" ]; then
+#   sed -i -e '$a\
+# parse_git_branch() {\
+#   git branch 2> /dev/null | sed -e \"/^[^*]/d\" -e \"s/* \\(.*\\)/(\\1)/\"\
+# }\
+# export PS1=\"\\[\\033[01;32m\\]\\u@\\h \\[\\e[91m\\]\\$(parse_git_branch) \\[\\e[1;33m\\]\\D{%Y/%m/%d} \\t\\[\\033[00m\\]:\\n\\[\\e[34m\\]\\w\\[\\e[00m\\]\$ \"
+# ' $OE_HOME/.bashrc
+# fi
+
+
+#--------------------------------------------------
+# Config Git Alias
+#--------------------------------------------------
+if [ $CONFIG_GIT_ALIAS = "True" ]; then
+  if [ -f "${$OE_HOME}/.gitconfig" ]; then
+    echo '.gitconfig already exist!'
+  else
+    cat <<EOF > $OE_HOME/.gitconfig
+[alias]
+  st = status
+  cm = commit
+  ch = checkout
+  br = branch
+  mg = merge
+  acm =  "!git add -A && git commit -m"
+  mgd = "!git mg $1 && git br -d $1; #"
+  # 查看分支(樹狀圖)
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  # 查看reflog(HeighLight)
+  rl = reflog --pretty=format:\"%Cred%h%Creset %C(auto)%gd%Creset %C(auto)%gs%C(reset) %C(green)(%cr)%C(reset) %C(bold blue)<%an>%Creset\" --abbrev-commit
+  # 查看stash(HeighLight)
+  sl = stash list --pretty=format:\"%C(red)%h%C(reset) - %C(dim yellow)(%C(bold magenta)%gd%C(dim yellow))%C(reset) %<(70,trunc)%s %C(green)(%cr) %C(bold blue)<%an>%C(reset)\"
+EOF
+fi
 fi
 
 echo "-----------------------------------------------------------"
