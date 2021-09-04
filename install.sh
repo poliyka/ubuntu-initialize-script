@@ -68,12 +68,12 @@ INSTALL_YARN="True"
 #   sudo su $OE_USER -c "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash"
 # fi
 
-if [ $INSTALL_YARN = "True" ]; then
-  echo -e "\n---- Install Yarn ----"
-  sudo su $OE_USER -c "curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key"
-  echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-  sudo apt-get update && sudo apt-get install yarn
-fi
+#if [ $INSTALL_YARN = "True" ]; then
+#  echo -e "\n---- Install Yarn ----"
+#  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+#  echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+#  sudo apt-get update && sudo apt-get install yarn -y
+#fi
 
 echo "-----------------------------------------------------------"
 echo "Done! Ubuntu Initialize Dependenies:"
