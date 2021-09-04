@@ -18,11 +18,11 @@ OE_HOME="/home/$OE_USER"
 #--------------------------------------------------
 # Choose Dependencise
 #--------------------------------------------------
-INSTALL_RANGER="True"
-INSTALL_NVM="True"
-INSTALL_YARN="True"
-INSTALL_FZF="True"
-CONFIG_BASHRC="True"
+INSTALL_RANGER="False"
+INSTALL_NVM="False"
+INSTALL_YARN="False"
+INSTALL_FZF="False"
+CONFIG_BASHRC="False"
 CONFIG_GIT_ALIAS="True"
 
 #--------------------------------------------------
@@ -46,86 +46,72 @@ CONFIG_GIT_ALIAS="True"
 #--------------------------------------------------
 # Install Ranger
 #--------------------------------------------------
-# if [ $INSTALL_RANGER = "True" ]; then
-#   echo -e "\n---- Install Ranger ----"
-#   sudo git clone https://github.com/ranger/ranger.git $OE_HOME/ranger
-#   sudo su - -c "cd ${OE_HOME}/ranger; make install"
-#   sudo su $OE_USER -c "ranger --copy-config=all"
-#   sudo rm -rf ${OE_HOME}/ranger
+if [ $INSTALL_RANGER = "True" ]; then
+  echo -e "\n---- Install Ranger ----"
+  sudo git clone https://github.com/ranger/ranger.git $OE_HOME/ranger
+  sudo su - -c "cd ${OE_HOME}/ranger; make install"
+  sudo su $OE_USER -c "ranger --copy-config=all"
+  sudo rm -rf ${OE_HOME}/ranger
 
-#   echo -e "\n---- Set Ranger open on vscode command ----"
-#   sed -i -e '$a\
-# class code(Command):\
-# \tdef execute(self):\
-# \t\tdirname = self.fm.thisdir.path\
-# \t\tcodecmd = ["code", dirname]\
-# \t\tself.fm.execute_command(codecmd)\
-# ' $OE_HOME/.config/ranger/commands.py
-# fi
+  echo -e "\n---- Set Ranger open on vscode command ----"
+  sed -i -e '$a\
+\nclass code(Command):\
+    def execute(self):\
+        dirname = self.fm.thisdir.path\
+        codecmd = ["code", dirname]\
+        self.fm.execute_command(codecmd)\
+' $OE_HOME/.config/ranger/commands.py
+fi
 
 #--------------------------------------------------
 # Install Nvm + Yarn
 #--------------------------------------------------
-# if [ $INSTALL_NVM = "True" ]; then
-#   echo -e "\n---- Install Nvm Mnager ----"
-#   sudo su $OE_USER -c "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash"
-# fi
+if [ $INSTALL_NVM = "True" ]; then
+  echo -e "\n---- Install Nvm Mnager ----"
+  sudo su $OE_USER -c "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash"
+fi
 
-#if [ $INSTALL_YARN = "True" ]; then
-#  echo -e "\n---- Install Yarn ----"
-#  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-#  echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-#  sudo apt-get update && sudo apt-get install yarn -y
-#fi
+if [ $INSTALL_YARN = "True" ]; then
+ echo -e "\n---- Install Yarn ----"
+ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+ sudo apt-get update && sudo apt-get install yarn -y
+fi
 
 #--------------------------------------------------
 # Install fzf
 #--------------------------------------------------
-# if [ $INSTALL_FZF = "True" ]; then
-#  echo -e "\n---- Install fzf ----"
-#  sudo su $OE_USER -c "git clone --depth 1 https://github.com/junegunn/fzf.git $OE_HOME/.fzf"
-#  sudo su $OE_USER -c "cd ${OE_HOME}/.fzf;./install"
-# fi
+if [ $INSTALL_FZF = "True" ]; then
+ echo -e "\n---- Install fzf ----"
+ sudo su $OE_USER -c "git clone --depth 1 https://github.com/junegunn/fzf.git $OE_HOME/.fzf"
+ sudo su $OE_USER -c "cd ${OE_HOME}/.fzf;./install"
+fi
 
 
 #--------------------------------------------------
 # Config bashrc
 #--------------------------------------------------
-# if [ $CONFIG_BASHRC = "True" ]; then
-#   sed -i -e '$a\
-# parse_git_branch() {\
-#   git branch 2> /dev/null | sed -e \"/^[^*]/d\" -e \"s/* \\(.*\\)/(\\1)/\"\
-# }\
-# export PS1=\"\\[\\033[01;32m\\]\\u@\\h \\[\\e[91m\\]\\$(parse_git_branch) \\[\\e[1;33m\\]\\D{%Y/%m/%d} \\t\\[\\033[00m\\]:\\n\\[\\e[34m\\]\\w\\[\\e[00m\\]\$ \"
-# ' $OE_HOME/.bashrc
-# fi
+if [ $CONFIG_BASHRC = "True" ]; then
+  sed -i -e '$a\
+parse_git_branch() {\
+  git branch 2> /dev/null | sed -e \"/^[^*]/d\" -e \"s/* \\(.*\\)/(\\1)/\"\
+}\
+export PS1=\"\\[\\033[01;32m\\]\\u@\\h \\[\\e[91m\\]\\$(parse_git_branch) \\[\\e[1;33m\\]\\D{%Y/%m/%d} \\t\\[\\033[00m\\]:\\n\\[\\e[34m\\]\\w\\[\\e[00m\\]\$ \"
+' $OE_HOME/.bashrc
+fi
 
 
 #--------------------------------------------------
 # Config Git Alias
 #--------------------------------------------------
 if [ $CONFIG_GIT_ALIAS = "True" ]; then
-  if [ -f "${$OE_HOME}/.gitconfig" ]; then
-    echo '.gitconfig already exist!'
-  else
-    cat <<EOF > $OE_HOME/.gitconfig
-[alias]
-  st = status
-  cm = commit
-  ch = checkout
-  br = branch
-  mg = merge
-  acm =  "!git add -A && git commit -m"
-  mgd = "!git mg $1 && git br -d $1; #"
-  # 查看分支(樹狀圖)
-  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-  # 查看reflog(HeighLight)
-  rl = reflog --pretty=format:\"%Cred%h%Creset %C(auto)%gd%Creset %C(auto)%gs%C(reset) %C(green)(%cr)%C(reset) %C(bold blue)<%an>%Creset\" --abbrev-commit
-  # 查看stash(HeighLight)
-  sl = stash list --pretty=format:\"%C(red)%h%C(reset) - %C(dim yellow)(%C(bold magenta)%gd%C(dim yellow))%C(reset) %<(70,trunc)%s %C(green)(%cr) %C(bold blue)<%an>%C(reset)\"
-EOF
+  GITCONFIG_PATH=$OD_HOME/.gitconfig
+  if ! sed -n '/\[alias\]/p' $GITCONFIG_PATH | grep '[alias]'; then
+    sudo su $OE_USER -c "printf '[alias]\n' >> $GITCONFIG_PATH"
+  fi
+  sudo su $OE_USER -c "python3 git_config.py"
 fi
-fi
+
 
 echo "-----------------------------------------------------------"
 echo "Done! Ubuntu Initialize Dependenies:"
