@@ -54,12 +54,12 @@ CONFIG_BASHRC="True"
 
 #   echo -e "\n---- Set Ranger open on vscode command ----"
 #   sed -i -e '$a\
-#   class code(Command):\
-#   \tdef execute(self):\
-#   \t\tdirname = self.fm.thisdir.path\
-#   \t\tcodecmd = ["code", dirname]\
-#   \t\tself.fm.execute_command(codecmd)\
-#   ' $OE_HOME/.config/ranger/commands.py
+# class code(Command):\
+# \tdef execute(self):\
+# \t\tdirname = self.fm.thisdir.path\
+# \t\tcodecmd = ["code", dirname]\
+# \t\tself.fm.execute_command(codecmd)\
+# ' $OE_HOME/.config/ranger/commands.py
 # fi
 
 #--------------------------------------------------
@@ -91,7 +91,12 @@ CONFIG_BASHRC="True"
 # Config bashrc
 #--------------------------------------------------
 if [ $CONFIG_BASHRC = "True" ]; then
-  sed -i -e '$aexport PS1=\"\\[\\033[01;32m\\]\\u@\\h\\[\\e[91m\\]\\$(parse_git_branch) \\[\\e[1;33m\\]\\D{%Y/%m/%d} \\t\\[\\033[00m\]:\\n\[\\e[34m\\]\\w\[\\e[00m\\]$ \"' $OE_HOME/.bashrc
+  sed -i -e '$a\
+parse_git_branch() {\
+\tgit branch 2> /dev/null | sed -e \"/^[^*]/d\\" -e \"s/* \(.*\)/ (\\1)/\"\
+}\
+export PS1=\"\\[\\033[01;32m\\]\\u@\\h\\[\\e[91m\\]\\$(parse_git_branch) \\[\\e[1;33m\\]\\D{%Y/%m/%d} \\t\\[\\033[00m\\]:\\n\\[\\e[34m\\]\\w\\[\\e[00m\\]\$ \"
+' $OE_HOME/.bashrc
 fi
 
 echo "-----------------------------------------------------------"
