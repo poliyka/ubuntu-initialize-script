@@ -79,12 +79,12 @@ INSTALL_FZF="True"
 #--------------------------------------------------
 # Install fzf
 #--------------------------------------------------
+# if [ $INSTALL_FZF = "True" ]; then
+#  echo -e "\n---- Install fzf ----"
+#  sudo su $OE_USER -c "git clone --depth 1 https://github.com/junegunn/fzf.git $OE_HOME/.fzf"
+#  sudo su $OE_USER -c "cd ${OE_HOME}/.fzf;./install"
+# fi
 
-if [ $INSTALL_FZF = "True" ]; then
- echo -e "\n---- Install fzf ----"
- git clone --depth 1 https://github.com/junegunn/fzf.git $OE_HOME/.fzf
- sudo su $OE_USER -c "cd ${OE_HOME}/.fzf;./install"
-fi
 
 echo "-----------------------------------------------------------"
 echo "Done! Ubuntu Initialize Dependenies:"
