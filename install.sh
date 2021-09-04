@@ -31,11 +31,11 @@ sudo apt-get upgrade -y
 # Install Dependencies
 #--------------------------------------------------
 echo -e "\n---- Installing apt-get Dependencise ----"
-sudo apt-get install git python3 python3-pip build-essential wget make vim python3-dev -y
 sudo apt-get install python3-venv python3-wheel libxslt-dev libzip-dev libldap2-dev libsasl2-dev -y
 sudo apt-get install python3-setuptools node-less libpng12-0 libjpeg-dev gdebi python3-virtualenv -y
+sudo apt-get install git python3 python3-pip build-essential wget make vim python3-dev -y
 sudo apt-get install libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl llvm libncurses5-dev -y
-sudo apt-get install libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl  libxml2-dev -y
+sudo apt-get install libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl libxml2-dev -y
 sudo apt-get install libxslt1-dev libjpeg62-dev vim-gtk3 pipenv silversearcher-ag exuberant-ctags figlet tox net-tools -y
 
 #--------------------------------------------------
@@ -117,6 +117,12 @@ fi
 
 echo "-----------------------------------------------------------"
 echo "Done! Ubuntu Initialize Dependenies:"
+echo "  INSTALL_RANGER = ${INSTALL_RANGER}"
+echo "  INSTALL_NVM = ${INSTALL_NVM}"
+echo "  INSTALL_YARN = ${INSTALL_YARN}"
+echo "  INSTALL_FZF = ${INSTALL_FZF}"
+echo "  CONFIG_BASHRC_COLOR = ${CONFIG_BASHRC_COLOR}"
+echo "  CONFIG_GIT_ALIAS = ${CONFIG_GIT_ALIAS}"
 echo "Finished. Restart your shell or reload config file."
 echo "source ~/.bashrc"
 echo "-----------------------------------------------------------"
