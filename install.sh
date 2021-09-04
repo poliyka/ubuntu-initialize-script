@@ -21,6 +21,7 @@ OE_HOME="/home/$OE_USER"
 INSTALL_RANGER="True"
 INSTALL_NVM="True"
 INSTALL_YARN="True"
+INSTALL_FZF="True"
 
 #--------------------------------------------------
 # Update Server
@@ -74,6 +75,16 @@ INSTALL_YARN="True"
 #  echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 #  sudo apt-get update && sudo apt-get install yarn -y
 #fi
+
+#--------------------------------------------------
+# Install fzf
+#--------------------------------------------------
+
+if [ $INSTALL_FZF = "True" ]; then
+ echo -e "\n---- Install fzf ----"
+ git clone --depth 1 https://github.com/junegunn/fzf.git $OE_HOME/.fzf
+ sudo su $OE_USER -c "cd ${OE_HOME}/.fzf;./install"
+fi
 
 echo "-----------------------------------------------------------"
 echo "Done! Ubuntu Initialize Dependenies:"
