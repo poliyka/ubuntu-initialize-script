@@ -91,9 +91,7 @@ CONFIG_BASHRC="True"
 # Config bashrc
 #--------------------------------------------------
 if [ $CONFIG_BASHRC = "True" ]; then
-  sed -i -e '$a\
-  export PS1="\[\033[01;32m\]\u@\h\[\e[91m\]\$(parse_git_branch) \[\e[1;33m\]\D{%Y/%m/%d} \t\[\033[00m\]:\n\[\e[34m\]\w\[\e[00m\]$ "
-  '
+  sed -i -e '$aexport PS1=\"\\[\\033[01;32m\\]\\u@\\h\\[\\e[91m\\]\\$(parse_git_branch) \\[\\e[1;33m\\]\\D{%Y/%m/%d} \\t\\[\\033[00m\]:\\n\[\\e[34m\\]\\w\[\\e[00m\\]$ \"' $OE_HOME/.bashrc
 fi
 
 echo "-----------------------------------------------------------"
