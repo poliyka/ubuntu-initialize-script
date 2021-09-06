@@ -35,6 +35,12 @@ CONFIG_GIT_ALIAS="True"
 sudo ./install.sh
 ```
 
+安裝完成後
+
+```h
+source ~/.bashrc
+```
+
 ## Introduction
 
 - INSTALL_RANGER
