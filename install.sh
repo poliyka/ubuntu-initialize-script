@@ -105,10 +105,14 @@ fi
 if [ $CONFIG_GIT_ALIAS = "True" ]; then
   echo -e "\n---- Config git alias ----"
   GITCONFIG_PATH=$OE_HOME/.gitconfig
+  if [[ ! -f "$GITCONFIG_PATH" ]]; then
+    sudo su $OE_USER -c "touch ${GITCONFIG_PATH}"
+  fi
+  
   if ! sed -n '/\[alias\]/p' $GITCONFIG_PATH | grep '[alias]'; then
     sudo su $OE_USER -c "printf '[alias]\n' >> $GITCONFIG_PATH"
   fi
-  sudo su $OE_USER -c "python3 git_config.py"
+  sudo su $OE_USER -c "python3 git_config.py"  
 fi
 
 
