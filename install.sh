@@ -100,7 +100,7 @@ fi
 #--------------------------------------------------
 if [ $INSTALL_PYENV = "True" ]; then
   echo -e "\n---- Install pyenv ----"
-  # sudo su $OE_USER -c "curl -L https://raw.github.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash"
+  sudo su $OE_USER -c "curl -L https://raw.github.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash"
 
   sed -i -e '$a\
 \
