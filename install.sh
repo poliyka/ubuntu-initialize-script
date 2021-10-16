@@ -17,6 +17,7 @@ INSTALL_RANGER="True"
 INSTALL_NVM="True"
 INSTALL_YARN="True"
 INSTALL_FZF="True"
+INSTALL_PYENV="True"
 CONFIG_BASHRC_COLOR="True"
 CONFIG_GIT_ALIAS="True"
 
@@ -87,6 +88,14 @@ EOF
 fi
 
 #--------------------------------------------------
+# Install pyenv
+#--------------------------------------------------
+if [ $INSTALL_PYENV = "True" ]; then
+  echo -e "\n---- Install pyenv ----"
+  sudo su $OE_USER -c "git clone https://github.com/pyenv/pyenv.git $OE_HOME/.pyenv"
+  sudo su $OE_USER -c "cd $OE_HOME/.pyenv && src/configure && make -C src"
+
+#--------------------------------------------------
 # Config bashrc
 #--------------------------------------------------
 if [ $CONFIG_BASHRC_COLOR = "True" ]; then
@@ -108,11 +117,11 @@ if [ $CONFIG_GIT_ALIAS = "True" ]; then
   if [[ ! -f "$GITCONFIG_PATH" ]]; then
     sudo su $OE_USER -c "touch ${GITCONFIG_PATH}"
   fi
-  
+
   if ! sed -n '/\[alias\]/p' $GITCONFIG_PATH | grep '[alias]'; then
     sudo su $OE_USER -c "printf '[alias]\n' >> $GITCONFIG_PATH"
   fi
-  sudo su $OE_USER -c "python3 git_config.py"  
+  sudo su $OE_USER -c "python3 git_config.py"
 fi
 
 
@@ -122,6 +131,7 @@ echo "  INSTALL_RANGER = ${INSTALL_RANGER}"
 echo "  INSTALL_NVM = ${INSTALL_NVM}"
 echo "  INSTALL_YARN = ${INSTALL_YARN}"
 echo "  INSTALL_FZF = ${INSTALL_FZF}"
+echo "  INSTALL_PYENV = ${INSTALL_PYENV}"
 echo "  CONFIG_BASHRC_COLOR = ${CONFIG_BASHRC_COLOR}"
 echo "  CONFIG_GIT_ALIAS = ${CONFIG_GIT_ALIAS}"
 echo "Finished. Restart your shell or reload config file."
