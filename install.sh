@@ -95,6 +95,17 @@ if [ $INSTALL_PYENV = "True" ]; then
   sudo su $OE_USER -c "git clone https://github.com/pyenv/pyenv.git $OE_HOME/.pyenv"
   sudo su $OE_USER -c "cd $OE_HOME/.pyenv && src/configure && make -C src"
 
+  sed -Ei -e '/^([^#]|$)/ {a \
+  export PYENV_ROOT="$HOME/.pyenv"
+  a \
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  a \
+  ' -e ':a' -e '$!{n;ba};}' $OE_HOME/.profile
+  echo 'eval "$(pyenv init --path)"' >>$OE_HOME/.profile
+
+  echo 'eval "$(pyenv init -)"' >> $OE_HOME/.bashrc
+fi
+
 #--------------------------------------------------
 # Config bashrc
 #--------------------------------------------------
