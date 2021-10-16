@@ -92,18 +92,16 @@ fi
 #--------------------------------------------------
 if [ $INSTALL_PYENV = "True" ]; then
   echo -e "\n---- Install pyenv ----"
-  sudo su $OE_USER -c "git clone https://github.com/pyenv/pyenv.git $OE_HOME/.pyenv"
-  sudo su $OE_USER -c "cd $OE_HOME/.pyenv && src/configure && make -C src"
+  # sudo su $OE_USER -c "curl -L https://raw.github.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash"
 
-  sed -Ei -e '/^([^#]|$)/ {a \
-  export PYENV_ROOT="$HOME/.pyenv"
-  a \
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  a \
-  ' -e ':a' -e '$!{n;ba};}' $OE_HOME/.profile
-  echo 'eval "$(pyenv init --path)"' >>$OE_HOME/.profile
-
-  echo 'eval "$(pyenv init -)"' >> $OE_HOME/.bashrc
+  sed -i -e '$a\
+\
+export PYENV_ROOT=\"\${HOME}/.pyenv\"\
+if [ -d \"\${PYENV_ROOT}\" ]; then\
+  export PATH=\"\${PYENV_ROOT}/bin:\${PATH}\"\
+  eval \"\$(pyenv init -)\"\
+fi
+' $OE_HOME/.bashrc
 fi
 
 #--------------------------------------------------
@@ -112,6 +110,7 @@ fi
 if [ $CONFIG_BASHRC_COLOR = "True" ]; then
   echo -e "\n---- Config bashrc color ----"
   sed -i -e '$a\
+\
 parse_git_branch() {\
   git branch 2> /dev/null | sed -e \"/^[^*]/d\" -e \"s/* \\(.*\\)/ (\\1)/\"\
 }\
