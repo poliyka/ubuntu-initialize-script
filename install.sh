@@ -6,9 +6,15 @@
 
 #--------------------------------------------------
 # OE Settings
+# OE SYS:
+# 1 : Debian, Ubuntu, Mint
+# 2 : Red Hat, Fedora, CentOS
+# 3 : SUSE
+# 4 : MacOS
 #--------------------------------------------------
 OE_USER="poliyka"
 OE_HOME="/home/$OE_USER"
+OE_SYS="1"
 
 #--------------------------------------------------
 # Choose Dependencise
@@ -100,16 +106,52 @@ fi
 #--------------------------------------------------
 if [ $INSTALL_PYENV = "True" ]; then
   echo -e "\n---- Install pyenv ----"
-  sudo su $OE_USER -c "curl -L https://raw.github.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash"
+  # sudo su $OE_USER -c "curl -L https://raw.github.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash"
 
-  sed -i -e '$a\
-\
-export PYENV_ROOT=\"\${HOME}/.pyenv\"\
-if [ -d \"\${PYENV_ROOT}\" ]; then\
-  export PATH=\"\${PYENV_ROOT}/bin:\${PATH}\"\
-  eval \"\$(pyenv init -)\"\
-fi
-' $OE_HOME/.bashrc
+  # (Debian, Ubuntu, Mint):
+  if [ $OE_SYS = "1" ]; then
+    sed -Ei -e '/^([^#]|$)/ {a \
+export PYENV_ROOT="$HOME/.pyenv"
+a \
+export PATH="$PYENV_ROOT/bin:$PATH"
+a \
+    ' -e ':a' -e '$!{n;ba};}' $OE_HOME/.profile
+    echo 'eval "$(pyenv init --path)"' >>$OE_HOME/.profile
+    echo 'eval "$(pyenv init -)"' >> $OE_HOME/.bashrc
+  fi
+
+  # (Red Hat, Fedora, CentOS):
+  if [ $OE_SYS = "2" ]; then
+    sed -Ei -e '/^([^#]|$)/ {a \
+export PYENV_ROOT="$HOME/.pyenv"
+a \
+export PATH="$PYENV_ROOT/bin:$PATH"
+a \
+' -e ':a' -e '$!{n;ba};}' $OE_HOME/.bash_profile
+    echo 'eval "$(pyenv init --path)"' >> $OE_HOME/.bash_profile
+    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> $OE_HOME/.profile
+    echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> $OE_HOME/.profile
+    echo 'eval "$(pyenv init --path)"' >> $OE_HOME/.profile
+    echo 'eval "$(pyenv init -)"' >> $OE_HOME/.bashrc
+  fi
+
+  # (SUSE):
+  if [ $OE_SYS = "3" ]; then
+    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> $OE_HOME/.profile
+    echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> $OE_HOME/.profile
+    echo 'eval "$(pyenv init --path)"' >> $OE_HOME/.profile
+    echo 'if command -v pyenv >/dev/null; then eval "$(pyenv init -)"; fi' >> $OE_HOME/.bashrc
+  fi
+
+  # (MacOS):
+  if [ $OE_SYS = "4" ]; then
+    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> $OE_HOME/.profile
+    echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> $OE_HOME/.profile
+    echo 'eval "$(pyenv init --path)"' >> $OE_HOME/.profile
+    echo 'if [ -n "$PS1" -a -n "$BASH_VERSION" ]; then source ~/.bashrc; fi' >> $OE_HOME/.profile
+    echo 'eval "$(pyenv init -)"' >> $OE_HOME/.bashrc
+  fi
+
 fi
 
 #--------------------------------------------------
