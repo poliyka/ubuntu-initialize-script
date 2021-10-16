@@ -13,6 +13,10 @@ OE_HOME="/home/$OE_USER"
 #--------------------------------------------------
 # Choose Dependencise
 #--------------------------------------------------
+UPDATE_SERVER="True"
+INSTALL_DEPENDEN="True"
+
+# Choices Packages
 INSTALL_RANGER="True"
 INSTALL_NVM="True"
 INSTALL_YARN="True"
@@ -24,20 +28,24 @@ CONFIG_GIT_ALIAS="True"
 #--------------------------------------------------
 # Update Server
 #--------------------------------------------------
-echo -e "\n---- Update Server ----"
-sudo apt-get update
-sudo apt-get upgrade -y
+if [ $UPDATE_SERVER = "True" ]; then
+  echo -e "\n---- Update Server ----"
+  sudo apt-get update
+  sudo apt-get upgrade -y
+fi
 
 #--------------------------------------------------
 # Install Dependencies
 #--------------------------------------------------
-echo -e "\n---- Installing apt-get Dependencise ----"
-sudo apt-get install python3-venv python3-wheel libxslt-dev libzip-dev libldap2-dev libsasl2-dev -y
-sudo apt-get install python3-setuptools node-less libpng12-0 libjpeg-dev gdebi python3-virtualenv -y
-sudo apt-get install git python3 python3-pip build-essential wget make vim python3-dev -y
-sudo apt-get install libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl llvm libncurses5-dev -y
-sudo apt-get install libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl libxml2-dev -y
-sudo apt-get install libxslt1-dev libjpeg62-dev vim-gtk3 pipenv silversearcher-ag exuberant-ctags figlet tox net-tools -y
+if [ $INSTALL_DEPENDEN = "True" ]; then
+  echo -e "\n---- Installing apt-get Dependencise ----"
+  sudo apt-get install python3-venv python3-wheel libxslt-dev libzip-dev libldap2-dev libsasl2-dev -y
+  sudo apt-get install python3-setuptools node-less libpng12-0 libjpeg-dev gdebi python3-virtualenv -y
+  sudo apt-get install git python3 python3-pip build-essential wget make vim python3-dev -y
+  sudo apt-get install libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl llvm libncurses5-dev -y
+  sudo apt-get install libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl libxml2-dev -y
+  sudo apt-get install libxslt1-dev libjpeg62-dev vim-gtk3 pipenv silversearcher-ag exuberant-ctags figlet tox net-tools -y
+fi
 
 #--------------------------------------------------
 # Install Ranger
