@@ -20,6 +20,10 @@ OE_USER="poliyka"
 #--------------------------------------------------
 # Choose Dependencise
 #--------------------------------------------------
+UPDATE_SERVER="True"
+INSTALL_DEPENDEN="True"
+
+# Choices Packages
 INSTALL_RANGER="True"
 INSTALL_NVM="True"
 INSTALL_YARN="True"
