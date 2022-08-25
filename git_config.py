@@ -16,6 +16,7 @@ def update_git_config():
     st = status
     cm = commit
     ch = checkout
+    sw = switch
     br = branch
     mg = merge
     acm =  "!git add -A && git commit -m"
