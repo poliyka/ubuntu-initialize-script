@@ -16,6 +16,7 @@
 OE_USER="poliyka"
 OE_HOME="/home/$OE_USER"
 OE_SYS="1"
+OE_PASSWORD="root"
 
 #--------------------------------------------------
 # Choose Dependencise
@@ -46,19 +47,7 @@ fi
 #--------------------------------------------------
 if [ $INSTALL_DEPENDEN = "True" ]; then
   echo -e "\n---- Installing apt-get Dependencise ----"
-  # Python 相關
-  sudo apt-get install python3-venv python3-wheel python3-setuptools \
-                       python3-virtualenv python3-dev python3-pip python-openssl \
-  # lib
-                       libxslt-dev libzip-dev libldap2-dev libsasl2-dev libjpeg-dev \
-                       gdebi build-essential libssl-dev zlib1g-dev libbz2-dev \
-                       libreadline-dev libsqlite3-dev curl llvm libncurses5-dev \
-                       libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev libxml2-dev \
-                       libxslt1-dev libjpeg62-dev
-  # tools
-                       node-less git wget make vim neovim trash-cli vim-gtk3 pipenv\
-                       silversearcher-ag exuberant-ctags figlet tox net-tools htop \
-                       cargo
+  sudo su $OE_USER -c "cd ansible; ./run.sh ${OE_PASSWORD}"
 fi
 
 #--------------------------------------------------
