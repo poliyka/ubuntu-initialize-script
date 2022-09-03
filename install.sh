@@ -11,6 +11,7 @@
 # 2 : Red Hat, Fedora, CentOS
 # 3 : SUSE
 # 4 : MacOS
+# 5 : Zsh
 #--------------------------------------------------
 OE_USER="poliyka"
 OE_HOME="/home/$OE_USER"
@@ -45,12 +46,19 @@ fi
 #--------------------------------------------------
 if [ $INSTALL_DEPENDEN = "True" ]; then
   echo -e "\n---- Installing apt-get Dependencise ----"
-  sudo apt-get install python3-venv python3-wheel libxslt-dev libzip-dev libldap2-dev libsasl2-dev -y
-  sudo apt-get install python3-setuptools node-less libjpeg-dev gdebi python3-virtualenv -y
-  sudo apt-get install git python3 python3-pip build-essential wget make vim python3-dev trash-cli -y
-  sudo apt-get install libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl llvm libncurses5-dev -y
-  sudo apt-get install libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl libxml2-dev -y
-  sudo apt-get install libxslt1-dev libjpeg62-dev vim-gtk3 pipenv silversearcher-ag exuberant-ctags figlet tox net-tools htop -y
+  # Python 相關
+  sudo apt-get install python3-venv python3-wheel python3-setuptools \
+                       python3-virtualenv python3-dev python3-pip python-openssl \
+  # lib
+                       libxslt-dev libzip-dev libldap2-dev libsasl2-dev libjpeg-dev \
+                       gdebi build-essential libssl-dev zlib1g-dev libbz2-dev \
+                       libreadline-dev libsqlite3-dev curl llvm libncurses5-dev \
+                       libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev libxml2-dev \
+                       libxslt1-dev libjpeg62-dev
+  # tools
+                       node-less git wget make vim neovim trash-cli vim-gtk3 pipenv\
+                       silversearcher-ag exuberant-ctags figlet tox net-tools htop \
+                       cargo
 fi
 
 #--------------------------------------------------
@@ -150,6 +158,13 @@ a \
     echo 'eval "$(pyenv init --path)"' >> $OE_HOME/.profile
     echo 'if [ -n "$PS1" -a -n "$BASH_VERSION" ]; then source ~/.bashrc; fi' >> $OE_HOME/.profile
     echo 'eval "$(pyenv init -)"' >> $OE_HOME/.bashrc
+  fi
+  
+  # (Zsh):
+  if [ $OE_SYS = "5" ]; then
+    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
+    echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+    echo 'eval "$(pyenv init -)"' >> ~/.zshrc
   fi
 
 fi
