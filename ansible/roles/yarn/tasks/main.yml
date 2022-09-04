@@ -1,28 +1,27 @@
-- name: Apt Remove Old YARN
+- name: Remove Old Yarn
   when: INSTALL_YARN | bool
-  become: true
   apt:
     name: yarn
     state: absent
 
-- name: Install YARN
+- name: Ensure apt-transport-https is installed
   when: INSTALL_YARN | bool
-  become: true
-  changed_when: false
-  shell:
-    cmd: |
-      curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-      echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-  args:
-    executable: /bin/bash
-    warn: true
+  apt:
+    name: apt-transport-https
 
-- name: Apt Install YARN
+- name: Add Yarn apt key
   when: INSTALL_YARN | bool
-  become: true
-  changed_when: false
+  apt_key:
+    url: https://dl.yarnpkg.com/debian/pubkey.gpg
+
+- name: Add Yarn repository
+  when: INSTALL_YARN | bool
+  apt_repository:
+    repo: "deb https://dl.yarnpkg.com/debian/ stable main"
+    filename: yarn
+
+- name: Install Yarn
+  when: INSTALL_YARN | bool
   apt:
     name: yarn
-    cache_valid_time: 3600
-    update_cache: true
     state: present

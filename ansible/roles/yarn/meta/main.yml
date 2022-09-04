@@ -1,14 +1,23 @@
 galaxy_info:
-  author: Poliyka
-  description: |
-    安裝 Apt 依賴套件
-  company: Personal
+  role_name: yarn
+  author: angristan
+  description: Ansible role for Yarn
   license: MIT
-  min_ansible_version: "2.13.3"
-  platforms:
-    - name: Ubuntu
-      versions:
-        - trusty
+  min_ansible_version: 2.13.3
 
-dependencies:
-  - role: apt
+  platforms:
+  - name: Debian
+    versions:
+    - all
+  - name: Ubuntu
+    versions:
+    - all
+
+  galaxy_tags:
+    - yarn
+    - nodejs
+    - node
+    - debian
+    - ubuntu
+
+dependencies: []
