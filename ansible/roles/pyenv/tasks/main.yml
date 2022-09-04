@@ -12,9 +12,24 @@
   shell:
     cmd: |
       {{ OE_HOME }}/pyenv-installer.sh
-      echo 'export PYENV_ROOT="{{ OE_HOME }}/.pyenv"' >> {{ OE_HOME }}/.bashrc
-      echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> {{ OE_HOME }}/.bashrc
-      echo 'eval "$(pyenv init -)"' >> {{ OE_HOME }}/.bashrc
+      if [ -f {{ OE_HOME }}/.bashrc];
+      then
+        echo 'export PYENV_ROOT="{{ OE_HOME }}/.pyenv"' >> {{ OE_HOME }}/.bashrc
+        echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> {{ OE_HOME }}/.bashrc
+        echo 'eval "$(pyenv init -)"' >> {{ OE_HOME }}/.bashrc
+      fi
+      if [ -f {{ OE_HOME }}/.profile];
+      then
+        echo 'export PYENV_ROOT="{{ OE_HOME }}/.pyenv"' >> {{ OE_HOME }}/.profile
+        echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> {{ OE_HOME }}/.profile
+        echo 'eval "$(pyenv init -)"' >> {{ OE_HOME }}/.profile
+      fi
+      if [ -f {{ OE_HOME }}/.bash_profile];
+      then
+        echo 'export PYENV_ROOT="{{ OE_HOME }}/.pyenv"' >> {{ OE_HOME }}/.bash_profile
+        echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> {{ OE_HOME }}/.bash_profile
+        echo 'eval "$(pyenv init -)"' >> {{ OE_HOME }}/.bash_profile
+      fi
   args:
     executable: /bin/bash
     warn: true
