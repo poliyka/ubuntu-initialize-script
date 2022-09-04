@@ -1,0 +1,23 @@
+galaxy_info:
+  role_name: pyenv
+  author: Poliyka
+  description: Ansible role for pyenv
+  license: MIT
+  min_ansible_version: 2.13.3
+
+  platforms:
+  - name: Debian
+    versions:
+    - all
+  - name: Ubuntu
+    versions:
+    - all
+
+  galaxy_tags:
+    - pyenv
+    - debian
+    - ubuntu
+
+dependencies:
+  - git
+

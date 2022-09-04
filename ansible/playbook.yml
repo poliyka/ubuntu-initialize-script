@@ -5,7 +5,8 @@
     # - role: ranger
     # - role: nvm
     # - role: yarn
-    - role: fzf
+    # - role: fzf
+    - role: pyenv
     # - role: git
   vars_files:
     - ./vars/env_vars.yml
