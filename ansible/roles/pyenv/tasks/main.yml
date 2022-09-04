@@ -1,9 +1,10 @@
 - name: Download pyenv-installer
-  become: true
   ansible.builtin.get_url:
     url: https://raw.github.com/yyuu/pyenv-installer/master/bin/pyenv-installer
     dest: "{{ OE_HOME }}/pyenv-installer.sh"
-    mode: 755
+    mode: 0755
+    group: "{{ OE_USER }}"
+    owner: "{{ OE_USER }}"
 
 - name: Install PYENV
   when: INSTALL_PYENV | bool
