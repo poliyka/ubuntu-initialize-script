@@ -47,7 +47,12 @@ fi
 #--------------------------------------------------
 if [ $INSTALL_DEPENDEN = "True" ]; then
   echo -e "\n---- Installing apt-get Dependencise ----"
-  sudo su $OE_USER -c "cd ansible; ./run.sh ${OE_PASSWORD}"
+  sudo apt-get install python3-venv python3-wheel libxslt-dev libzip-dev libldap2-dev libsasl2-dev -y
+  sudo apt-get install python3-setuptools node-less libjpeg-dev gdebi python3-virtualenv -y
+  sudo apt-get install git python3 python3-pip build-essential wget make vim python3-dev -y
+  sudo apt-get install libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl llvm libncurses5-dev -y
+  sudo apt-get install libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl libxml2-dev -y
+  sudo apt-get install libxslt1-dev libjpeg62-dev vim-gtk3 pipenv silversearcher-ag exuberant-ctags figlet tox net-tools htop -y
 fi
 
 #--------------------------------------------------
@@ -148,7 +153,7 @@ a \
     echo 'if [ -n "$PS1" -a -n "$BASH_VERSION" ]; then source ~/.bashrc; fi' >> $OE_HOME/.profile
     echo 'eval "$(pyenv init -)"' >> $OE_HOME/.bashrc
   fi
-  
+
   # (Zsh):
   if [ $OE_SYS = "5" ]; then
     echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
