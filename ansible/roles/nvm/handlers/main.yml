@@ -1,3 +1,4 @@
 handlers:
-  - name: Source ~/.bashrc
+  - name: Enable nvm
     command: source ~/.bashrc
+    listen: "source bashrc"
