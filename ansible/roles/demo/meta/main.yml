@@ -11,4 +11,4 @@ galaxy_info:
         - trusty
 
 dependencies:
-  - role: system
+  - role: other
