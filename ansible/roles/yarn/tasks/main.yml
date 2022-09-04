@@ -14,8 +14,7 @@
   when: INSTALL_YARN | bool
   become: true
   apt:
-    name: "{{ item }}"
+    name: yarn
     cache_valid_time: 3600
     update_cache: true
-  loop:
-    yarn
+    state: present
