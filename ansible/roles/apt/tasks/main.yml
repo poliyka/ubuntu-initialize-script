@@ -3,6 +3,7 @@
   become: true
   ansible.builtin.apt:
     name: "{{ item }}"
+    cache_valid_time: 30
     upgrade: true
     update_cache: true
   loop:
