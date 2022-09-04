@@ -1,0 +1,3 @@
+handlers:
+  - name: Source ~/.bashrc
+    command: source ~/.bashrc
