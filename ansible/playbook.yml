@@ -1,0 +1,9 @@
+- name: Ubuntu20.04 AutoSetup Script
+  hosts: ubuntu
+  roles:
+    # - role: apt
+    # - role: ranger
+    - role: nvm
+    # - role: git
+  vars_files:
+    - ./vars/env_vars.yml

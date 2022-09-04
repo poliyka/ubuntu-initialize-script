@@ -1,0 +1,8 @@
+- name: Update && Upgrade
+  changed_when: false
+  become: true
+  ansible.builtin.shell:
+    cmd: echo "good" >> ./log/log.log
+  args:
+    executable: /bin/bash
+    warn: true

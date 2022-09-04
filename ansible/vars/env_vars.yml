@@ -1,0 +1,11 @@
+OE_USER: "{{ lookup('ansible.builtin.env', 'OE_USER') }}"
+OE_HOME: "/home/{{ OE_USER }}"
+OE_PASSWORD: "root"
+INSTALL_DEPENDENT: True
+INSTALL_RANGER: True
+INSTALL_NVM: True
+INSTALL_YARN: True
+INSTALL_FZF: True
+INSTALL_PYENV: True
+CONFIG_BASHRC_COLOR: True
+CONFIG_GIT_ALIAS: True
