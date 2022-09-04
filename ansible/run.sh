@@ -10,7 +10,6 @@ set +o allexport
 # 確定 Ansible 指令是否存在
 if ! command -v ansible-playbook
 then
-sudo apt-add-repository ppa:ansible/ansible
 sudo apt update
 sudo apt-get install ansible -y
 fi
