@@ -1,4 +1,5 @@
 - name: Install Ranger
+  when: INSTALL_RANGER | bool
   changed_when: false
   ansible.builtin.shell:
     cmd: |
