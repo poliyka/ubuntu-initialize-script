@@ -1,7 +1,7 @@
 galaxy_info:
-  role_name: yarn
+  role_name: fzf
   author: Poliyka
-  description: Ansible role for Yarn
+  description: Ansible role for fzf
   license: MIT
   min_ansible_version: 2.13.3
 
@@ -14,9 +14,7 @@ galaxy_info:
     - all
 
   galaxy_tags:
-    - yarn
-    - nodejs
-    - node
+    - fzf
     - debian
     - ubuntu
 
