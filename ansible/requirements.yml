@@ -1,0 +1,6 @@
+---
+
+- src: https://github.com/viasite-ansible/ansible-role-zsh
+  scm: git
+  version: master
+  name: viasite-ansible.zsh
