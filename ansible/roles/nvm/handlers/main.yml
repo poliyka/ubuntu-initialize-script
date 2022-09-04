@@ -1,9 +1,0 @@
-tasks:
-  - name: Enable nvm
-    command: echo "Source ~/.bashrc"
-    notify: "enable nvm"
-
-handlers:
-  - name: Source ~/.bashrc
-    command: source ~/.bashrc
-    listen: "enable nvm"
