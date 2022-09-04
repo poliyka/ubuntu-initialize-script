@@ -1,5 +1,6 @@
 - name: Install YARN
   when: INSTALL_YARN | bool
+  become: true
   changed_when: false
   shell:
     cmd: |
