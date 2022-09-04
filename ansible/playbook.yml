@@ -5,13 +5,7 @@
     # - role: ranger
     # - role: nvm
     # - role: yarn
-    # - role: fzf
+    - role: fzf
     # - role: git
-    - { role: viasite-ansible.zsh, become: true }
   vars_files:
     - ./vars/env_vars.yml
-  vars:
-    zsh_antigen_bundles_extras:
-      - nvm
-      - joel-porquet/zsh-dircolors-solarized
-    zsh_autosuggestions_bind_key: "^U"
