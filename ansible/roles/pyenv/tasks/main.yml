@@ -1,9 +1,16 @@
+- name: Download pyenv-installer
+  become: true
+  ansible.builtin.get_url:
+    url: https://raw.github.com/yyuu/pyenv-installer/master/bin/pyenv-installer
+    dest: "{{ OE_HOME }}/pyenv-installer.sh"
+    mode: 755
+
 - name: Install PYENV
   when: INSTALL_PYENV | bool
   changed_when: false
   shell:
     cmd: |
-      curl -L https://raw.github.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+      {{ OE_HOME }}/pyenv-installer.sh
       sed -Ei -e '/^([^#]|$)/ {a \
       export PYENV_ROOT="{{ OE_HOME }}/.pyenv"
       a \
