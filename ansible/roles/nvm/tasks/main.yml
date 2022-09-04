@@ -1,7 +1,7 @@
 - name: Install NVM
   when: INSTALL_NVM | bool
   changed_when: false
-  ansible.builtin.shell:
+  shell:
     cmd: $(curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash)
   args:
     creates: "{{ OE_HOME }}/.nvm/nvm.sh"

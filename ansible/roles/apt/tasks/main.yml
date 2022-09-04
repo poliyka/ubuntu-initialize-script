@@ -1,7 +1,7 @@
 - name: Install dependent library
   when: INSTALL_DEPENDENT | bool
   become: true
-  ansible.builtin.apt:
+  apt:
     name: "{{ item }}"
     cache_valid_time: 3600
     update_cache: true

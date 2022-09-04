@@ -2,7 +2,7 @@
   when: CONFIG_GIT_ALIAS | bool
   changed_when: false
   become: true
-  ansible.builtin.shell:
+  shell:
     cmd: |
       GITCONFIG_PATH={{ OE_HOME }}/.gitconfig
       if [[ ! -f "$GITCONFIG_PATH" ]];
@@ -19,8 +19,9 @@
     warn: true
 
 - name: Run Python Script Insert Git Alias Config
+  when: CONFIG_GIT_ALIAS | bool
   changed_when: false
-  ansible.builtin.script: ./roles/git/files/git_config.py
+  script: ./roles/git/files/git_config.py
   args:
     executable: python3
   register: python_result

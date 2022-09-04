@@ -1,7 +1,7 @@
 - name: Install Ranger
   when: INSTALL_RANGER | bool
   changed_when: false
-  ansible.builtin.shell:
+  shell:
     cmd: |
       $(git clone https://github.com/ranger/ranger.git {{ OE_HOME }}/ranger)
       $(cd {{ OE_HOME }}/ranger; make install)

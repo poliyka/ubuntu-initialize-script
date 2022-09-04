@@ -3,7 +3,7 @@
   roles:
     # - role: apt
     # - role: ranger
-    - role: nvm
-    # - role: git
+    # - role: nvm
+    - role: git
   vars_files:
     - ./vars/env_vars.yml
