@@ -16,7 +16,6 @@
 OE_USER="poliyka"
 OE_HOME="/home/$OE_USER"
 OE_SYS="1"
-OE_PASSWORD="root"
 
 #--------------------------------------------------
 # Choose Dependencise
