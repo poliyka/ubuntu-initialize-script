@@ -1,0 +1,32 @@
+- name: Insert Git [Alias] Block
+  when: CONFIG_GIT_ALIAS | bool
+  changed_when: false
+  become: true
+  shell:
+    cmd: |
+      GITCONFIG_PATH={{ OE_HOME }}/.gitconfig
+      if [[ ! -f "$GITCONFIG_PATH" ]];
+      then
+        touch ${GITCONFIG_PATH}
+      fi
+
+      if ! sed -n '/\[alias\]/p' $GITCONFIG_PATH | grep '[alias]';
+      then
+        printf '[alias]\n' >> $GITCONFIG_PATH
+      fi
+  args:
+    executable: /bin/bash
+    warn: true
+
+- name: Run Python Script Insert Git Alias Config
+  when: CONFIG_GIT_ALIAS | bool
+  changed_when: false
+  script: ./roles/git/files/git_config.py
+  args:
+    executable: python3
+  register: python_result
+
+- name: Python Script Stdout
+  when: CONFIG_GIT_ALIAS | bool
+  ansible.builtin.debug:
+    msg: "'{{ python_result.stdout }}'"
