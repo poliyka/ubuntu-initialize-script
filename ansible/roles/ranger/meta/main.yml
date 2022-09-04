@@ -1,0 +1,23 @@
+galaxy_info:
+  role_name: ranger
+  author: Poliyka
+  description: Ansible role for ranger
+  license: MIT
+  min_ansible_version: 2.13.3
+
+  platforms:
+  - name: Debian
+    versions:
+    - all
+  - name: Ubuntu
+    versions:
+    - all
+
+  galaxy_tags:
+    - ranger
+    - debian
+    - ubuntu
+
+dependencies:
+  - git
+
