@@ -13,6 +13,7 @@
 - name: Apt Install YARN
   when: INSTALL_YARN | bool
   become: true
+  changed_when: false
   apt:
     name: yarn
     cache_valid_time: 3600
