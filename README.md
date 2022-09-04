@@ -1,5 +1,8 @@
 # Ubuntu 20.04 初始化腳本
 
+## 停止更新!! 改用 Ansible 了
+[https://github.com/poliyka/ansible-ubuntu-script](https://github.com/poliyka/ansible-ubuntu-script)
+
 ## Configuration
 
 - [install.sh](./install.sh) 中修正使用者名稱
