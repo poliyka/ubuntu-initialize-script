@@ -7,7 +7,7 @@
     # - role: yarn
     # - role: fzf
     # - role: git
-    - role: viasite-ansible.zsh
+    - { role: viasite-ansible.zsh, become: true }
   vars_files:
     - ./vars/env_vars.yml
   vars:
