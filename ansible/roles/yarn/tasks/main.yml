@@ -6,7 +6,16 @@
     cmd: |
       curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
       echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-      sudo apt-get update && sudo apt-get install yarn -y
   args:
     executable: /bin/bash
     warn: true
+
+- name: Apt Install YARN
+  when: INSTALL_YARN | bool
+  become: true
+  apt:
+    name: "{{ item }}"
+    cache_valid_time: 3600
+    update_cache: true
+  loop:
+    yarn
