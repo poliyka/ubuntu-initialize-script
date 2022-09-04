@@ -1,3 +1,10 @@
+- name: Apt Remove Old YARN
+  when: INSTALL_YARN | bool
+  become: true
+  apt:
+    name: yarn
+    state: absent
+
 - name: Install YARN
   when: INSTALL_YARN | bool
   become: true
