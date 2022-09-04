@@ -1,10 +1,13 @@
+- name: ENV
+  ansible.builtin.debug:
+    msg: "'{{ INSTALL_DEPENDENT }}'"
+
 - name: Install dependent library
-  when: INSTALL_DEPENDENT == "True"
+  when: INSTALL_DEPENDENT
   become: true
   ansible.builtin.apt:
     name: "{{ item }}"
     cache_valid_time: 30
-    upgrade: true
     update_cache: true
   loop:
     # Python
