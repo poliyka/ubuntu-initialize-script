@@ -111,29 +111,26 @@ if [ $INSTALL_PYENV = "True" ]; then
 
   # (Debian, Ubuntu, Mint):
   if [ $OE_SYS = "1" ]; then
-    sed -Ei -e '/^([^#]|$)/ {a \
-export PYENV_ROOT="$HOME/.pyenv"
-a \
-export PATH="$PYENV_ROOT/bin:$PATH"
-a \
-    ' -e ':a' -e '$!{n;ba};}' $OE_HOME/.profile
-    echo 'eval "$(pyenv init --path)"' >>$OE_HOME/.profile
+    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> $OE_HOME/.bashrc
+    echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> $OE_HOME/.bashrc
     echo 'eval "$(pyenv init -)"' >> $OE_HOME/.bashrc
+    echo 'eval "$(pyenv virtualenv-init -)"' >> $OE_HOME/.bashrc
+    
+    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> $OE_HOME/.profile
+    echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> $OE_HOME/.profile
+    echo 'eval "$(pyenv init -)"' >> $OE_HOME/.profilee
   fi
 
   # (Red Hat, Fedora, CentOS):
   if [ $OE_SYS = "2" ]; then
-    sed -Ei -e '/^([^#]|$)/ {a \
-export PYENV_ROOT="$HOME/.pyenv"
-a \
-export PATH="$PYENV_ROOT/bin:$PATH"
-a \
-' -e ':a' -e '$!{n;ba};}' $OE_HOME/.bash_profile
-    echo 'eval "$(pyenv init --path)"' >> $OE_HOME/.bash_profile
-    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> $OE_HOME/.profile
-    echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> $OE_HOME/.profile
-    echo 'eval "$(pyenv init --path)"' >> $OE_HOME/.profile
+    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> $OE_HOME/.bashrc
+    echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> $OE_HOME/.bashrc
     echo 'eval "$(pyenv init -)"' >> $OE_HOME/.bashrc
+    echo 'eval "$(pyenv virtualenv-init -)"' >> $OE_HOME/.bashrc
+    
+    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> $OE_HOME/.profile
+    echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> $OE_HOME/.profile
+    echo 'eval "$(pyenv init -)"' >> $OE_HOME/.profilee
   fi
 
   # (SUSE):
