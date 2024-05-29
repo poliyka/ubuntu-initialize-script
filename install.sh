@@ -13,7 +13,7 @@
 # 4 : MacOS
 # 5 : Zsh
 #--------------------------------------------------
-OE_USER="poliyka"
+OE_USER="$USER"
 OE_HOME="/home/$OE_USER"
 OE_SYS="1"
 
