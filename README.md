@@ -2,17 +2,6 @@
 
 ## Configuration
 
-- [install.sh](./install.sh) 中修正使用者名稱
-
-```python
-...
-#--------------------------------------------------
-# OE Settings
-#--------------------------------------------------
-OE_USER="poliyka"
-...
-```
-
 - [install.sh](./install.sh) 選擇需要的套件
 
 ```python
